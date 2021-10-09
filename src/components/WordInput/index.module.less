@@ -1,0 +1,23 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+@media screen and (min-width: 769px) {
+  .row {
+    flex-wrap: nowrap;
+  }
+}
+
+.input-title {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 5px;
+  font-weight: bold;
+  cursor: default;
+}

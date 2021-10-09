@@ -1,0 +1,68 @@
+.report-ul .active-report-pointer:nth-child(1):nth-last-child(2) ~ li{
+  margin-top: 200px;
+}
+
+.btn-view-form {
+  border: 0px !important;
+}
+
+.active-report-pointer{
+  margin-top: 10px;
+}
+.active-report-pointer{
+  position: absolute;
+  transition: top 0.3s;
+  width: 2em;
+  height: 2em;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  right: 5px;
+  animation:fadeIn 0.3s , leftRight .7s cubic-bezier(0.82, 0.16, 0.88, 0.74) alternate-reverse infinite;
+  transform: translateX(60px);
+}
+@keyframes leftRight{
+  0%{
+      right: 5px;
+  }
+  100%{
+      right: 10px;
+  }
+}
+.active-report-pointer::before,.active-report-pointer::after{
+  content: "";
+  position: absolute;
+  display: block;
+  width: 2.5em;
+  height: 2em;
+  background-image: url(data:image/png;base64,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);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.6;
+  transform-origin: 0% 50%;
+}
+.active-report-pointer::before{
+  animation: pointerRotate1 3s linear infinite;
+}
+.active-report-pointer::after{
+  transform: rotateX(130deg);
+  animation: pointerRotate2 3s linear infinite;
+}
+@keyframes pointerRotate1{
+  0%{
+      transform: rotateX(40deg);
+  }
+  100%{
+      transform: rotateX(399deg);
+  }
+}
+
+@keyframes pointerRotate2{
+  0%{
+      transform: rotateX(130deg);
+  }
+  100%{
+      transform: rotateX(489deg);
+  }
+}

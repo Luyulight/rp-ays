@@ -1,7 +1,8 @@
 import React from 'react';
-import logo from './logo.svg';
+import logo from './assets/logo.svg';
 import './App.css';
 import './assets/font/myFont.css'
+import './common/DateExtension.js'
 import ReportList from './views/ReportList';
 import CreateForm from './views/CreateForm';
 

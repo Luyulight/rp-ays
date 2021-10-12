@@ -204,6 +204,13 @@ let Body = (props: any) => {
         ></i>
         <span className={common["text-bold"]}>{item.cname}</span>
       </span>
+      <div className={styles["form-list-edit-container"]}>
+        <i
+          className={`ic ic-close-circle-fill ${common["text-danger"]} ${
+            editable ? "" : common["hide"]
+          }`}
+        ></i>
+      </div>
     </li>
   ))
 
@@ -272,12 +279,29 @@ let Body = (props: any) => {
       <br />
       <div className={styles.row}>
         <div className={`${styles["input-title"]} col-sm-12 col-md-2`}>
-          <span>Categories:</span>
+          <span className={styles["self-align-top"]}>Categories:</span>
         </div>
         <div className={`${styles["input-group"]} col-md-10 col-sm-12 text-sm`}>
           <ul className={styles["form-list-ul"]}>{listItems}</ul>
+          <div
+            className={`${common["animation-fade-in"]} ${
+              listItems.length == 0 ? "" : common["hide"]
+            }`}
+          >
+            no category selected
+          </div>
         </div>
       </div>
+      <div className={styles.row}>
+        <div className={`${styles["input-title"]} col-sm-12 col-md-2`}></div>
+        <div className={`${styles["input-group"]} col-md-10 col-sm-12`}>
+          <button className="btn btn-primary btn-gradient-primary btn-dashed text-bold col-sm-12 col-md-12 light-hover text-sm no-radius">
+            <i className="ic ic-plus"></i>Add Category
+          </button>
+        </div>
+      </div>
+      <br />
+      <div></div>
       <div
         className={`${styles["input-group"]} ${styles["flex-container"]} ${styles["flex-wrap"]} col-sm-12 col-md-12 `}
       >

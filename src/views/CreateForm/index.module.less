@@ -382,8 +382,9 @@ label {
   flex-wrap: wrap;
   max-height: 400px;
   overflow: hidden;
-  overflow-y: scroll;
+  // overflow-y: scroll;
   padding: 4px 5px 0px 5px;
+  margin-top: 0;
 }
 .form-list-ul .form-list-li {
   counter-increment: categoryCounter;
@@ -423,4 +424,32 @@ li.form-list-li.enlarge {
   margin-right: 5px;
   font-weight: bolder;
   white-space: nowrap;
+}
+.self-align-top {
+  align-self: flex-start;
+}
+.form-list-edit-container {
+  display: inline-block;
+  text-decoration: none !important;
+  transition: all 0.3s;
+  opacity: 0;
+  position: absolute;
+  right: -5px;
+  top: -0.5em;
+  font-size: 1rem;
+}
+.form-list-li:hover .form-list-edit-container {
+  opacity: 1;
+}
+.form-list-edit-container > i {
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.form-list-edit-container > i {
+  /* transform:scale(1.2); */
+  display: inline-block;
+  margin: 0px 5px;
+}
+.form-list-edit-container > i:hover {
+  transform: scale(1.2);
 }

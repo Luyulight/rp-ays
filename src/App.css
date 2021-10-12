@@ -211,6 +211,103 @@
 .shadow-bottom {
   box-shadow: 0px 7px 6px -5px rgba(0, 0, 0, 0.4) !important;
 }
+.btn-gradient-info {
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 120, 188, 0.8) 1%,
+    rgba(0, 190, 218, 0.8) 100%
+  );
+}
+.btn-gradient-info:active {
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 120, 188, 0.8) 1%,
+    rgba(0, 190, 218, 0.8) 100%
+  ) !important;
+}
+.btn-gradient-info.btn-dashed:not(:hover) {
+  color: #17a2b8;
+}
+
+.btn-gradient-success,
+.btn-gradient-success:active,
+.btn-gradient-success:hover {
+  background-image: linear-gradient(
+    to right,
+    rgba(95, 174, 62, 0.8) 1%,
+    rgba(64, 238, 109, 0.8) 100%
+  );
+}
+.btn-gradient-success.btn-dashed:not(:hover) {
+  color: #5fae3e;
+}
+
+.btn-gradient-pink,
+.btn-gradient-pink:active,
+.btn-gradient-pink:hover {
+  background-image: linear-gradient(
+    to right,
+    rgba(62, 86, 174, 0.8) 1%,
+    rgba(91, 64, 238, 0.8) 100%
+  );
+}
+.btn-gradient-pink.btn-dashed:not(:hover) {
+  color: rgba(62, 86, 174, 0.8);
+}
+
+.btn-gradient-primary,
+.btn-gradient-primary:active {
+  background-image: linear-gradient(to right, #3d7bc8 1%, #719acc 100%);
+  border-color: #578ccc !important;
+}
+.btn-gradient-primary.btn-dashed:not(:hover),
+.btn-gradient-primary:active.btn-dashed:not(:hover) {
+  color: #578ccc;
+}
+
+.btn-gradient-warning,
+.btn-gradient-warning:hover {
+  background-image: linear-gradient(
+    to right,
+    rgba(224, 122, 16, 0.8) 1%,
+    rgba(255, 205, 23, 0.8) 100%
+  );
+}
+.btn-gradient-warning.btn-dashed:not(:hover),
+.btn-gradient-warning:hover.btn-dashed:not(:hover) {
+  color: rgba(255, 205, 23, 0.8);
+}
+
+.btn-gradient-danger {
+  border-color: transparent;
+}
+.btn-gradient-danger,
+.btn-gradient-danger:active,
+.btn-gradient-danger:hover {
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 110, 110, 0.8) 1%,
+    #fa665c 100%
+  );
+}
+.btn-gradient-danger.btn-dashed:not(:hover) {
+  color: rgba(255, 110, 110, 0.8);
+}
+
+.btn-shadow-bottom:visited,
+.btn-shadow-bottom:focus,
+.btn-shadow-bottom,
+.shadow-bottom:visited,
+.shadow-bottom:focus,
+.shadow-bottom {
+  box-shadow: 0px 7px 6px -5px rgba(0, 0, 0, 0.4) !important;
+}
+
+.btn-dashed:not(:hover) {
+  background: transparent;
+  box-shadow: none !important;
+  border: 1px dashed #ccc !important;
+}
 
 .light-hover {
   overflow: hidden;
@@ -440,4 +537,18 @@ select {
 .margin-horizon {
   margin-left: 5px;
   margin-right: 5px;
+}
+
+.padding-control {
+  padding: 5px 10px;
+}
+
+ul:not(.ul-default) {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.no-radius {
+  border-radius: 0;
 }

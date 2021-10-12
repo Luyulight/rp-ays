@@ -64,12 +64,22 @@ let Body = (props: any) => {
   const [name, setName] = useState("")
   const [startDate, setStartDate] = useState("")
   const [endDate, setEndDate] = useState("")
+  const [markets, setMarkets] = useState([0, 1, 2])
   const handleSubmit = () => {
-    console.log(name, startDate, endDate)
+    console.log(name, startDate, endDate, markets)
   }
   const setTagDate = (start, end) => {
     setStartDate(start)
     setEndDate(end)
+  }
+  const handleSelectMarket = value => {
+    let arr = markets
+    if (arr.includes(value)) {
+      arr.splice(arr.indexOf(value), 1)
+    } else {
+      arr.push(value)
+    }
+    setMarkets(arr)
   }
 
   let date = new Date()
@@ -120,9 +130,9 @@ let Body = (props: any) => {
   ))
 
   let labelData = [
-    { name: "rakuten", value: "0" },
-    { name: "yahoo", value: "1" },
-    { name: "amazon", value: "2" },
+    { name: "rakuten", value: 0 },
+    { name: "yahoo", value: 1 },
+    { name: "amazon", value: 2 },
   ]
   let labelItems = labelData.map(item => (
     <>
@@ -133,6 +143,8 @@ let Body = (props: any) => {
         value={item.value}
         hidden={true}
         disabled={!editable}
+        defaultChecked={markets.includes(item.value)}
+        onClick={() => handleSelectMarket(item.value)}
       />
       <label
         htmlFor={`market-${item.value}`}
@@ -141,6 +153,58 @@ let Body = (props: any) => {
         <i className={`icon-${item.name}`}></i>
       </label>
     </>
+  ))
+
+  let listData = [
+    { cid: 2501, market: 1, cname: "コスメ、美容、ヘアケア", group: false },
+    {
+      cid: 2502,
+      market: 1,
+      cname: "スマホ、タブレット、パソコン",
+      group: false,
+    },
+    {
+      cid: 2497,
+      market: 1,
+      cname: "ベビー、キッズ、マタニティ",
+      group: false,
+    },
+    {
+      cid: 465392,
+      market: 2,
+      cname: "本",
+      group: false,
+    },
+    {
+      cid: 134,
+      market: -1,
+      cname: "test group",
+      group: true,
+    },
+    {
+      cid: 100227,
+      market: 0,
+      cname: "食品",
+      group: false,
+    },
+  ]
+  let listItems = listData.map(item => (
+    <li className={styles["form-list-li"]}>
+      <span>
+        <i
+          className={
+            item.market < 0
+              ? "icon-group margin-horizon"
+              : item.market < 1
+              ? "icon-rakuten-sm"
+              : item.market < 2
+              ? "icon-yahoo-sm"
+              : "icon-amazon-sm"
+          }
+        ></i>
+        <span className={common["text-bold"]}>{item.cname}</span>
+      </span>
+    </li>
   ))
 
   return (
@@ -156,7 +220,7 @@ let Body = (props: any) => {
             defaultValue={name}
             type="text"
             className={`${styles["input-bottom-border"]}`}
-            placeholder=""
+            placeholder="Please enter report name"
             disabled={!editable}
           />
           <i className={`ic ic-detail ${styles["input-icon"]}`}></i>
@@ -173,7 +237,7 @@ let Body = (props: any) => {
             type="text"
             className={`${styles["input-bottom-border"]}`}
             defaultValue={startDate}
-            placeholder=""
+            placeholder="2014-09"
             disabled={!editable}
           />
           <i className={`ic ic-calendar ${styles["input-icon"]}`}></i>
@@ -184,7 +248,7 @@ let Body = (props: any) => {
             type="text"
             className={`${styles["input-bottom-border"]}`}
             defaultValue={endDate}
-            placeholder=""
+            placeholder="2022-10"
             disabled={!editable}
           />
           <i className={`ic ic-calendar ${styles["input-icon"]}`}></i>
@@ -203,6 +267,15 @@ let Body = (props: any) => {
         </div>
         <div className={`${styles["input-group"]} col-md-10 col-sm-12 text-sm`}>
           {labelItems}
+        </div>
+      </div>
+      <br />
+      <div className={styles.row}>
+        <div className={`${styles["input-title"]} col-sm-12 col-md-2`}>
+          <span>Categories:</span>
+        </div>
+        <div className={`${styles["input-group"]} col-md-10 col-sm-12 text-sm`}>
+          <ul className={styles["form-list-ul"]}>{listItems}</ul>
         </div>
       </div>
       <div

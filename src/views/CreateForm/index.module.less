@@ -374,3 +374,53 @@ label {
   align-items: center;
   justify-content: center;
 }
+
+.form-list-ul {
+  counter-reset: categoryCounter;
+  cursor: default;
+  display: flex;
+  flex-wrap: wrap;
+  max-height: 400px;
+  overflow: hidden;
+  overflow-y: scroll;
+  padding: 4px 5px 0px 5px;
+}
+.form-list-ul .form-list-li {
+  counter-increment: categoryCounter;
+  transition: all 0.3s;
+  width: calc(50% - 4px);
+  display: inline-flex;
+  padding: 5px;
+  margin: 2px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  position: relative;
+  word-break: break-all;
+  border: 1px solid transparent;
+}
+li.form-list-li.enlarge {
+  width: calc(25% - 4px);
+}
+@media screen and (max-width: 768px) {
+  .form-list-ul .form-list-li {
+    width: 100%;
+    margin: 2px 3px;
+  }
+}
+.form-list-li .icon-rakuten,
+.form-list-li .icon-amazon,
+.form-list-li .icon-yahoo {
+  font-size: 9px;
+  margin: 0px 2px;
+}
+.form-list-ul .form-list-li:hover,
+.form-list-ul .form-list-li.hover {
+  color: #17a2b8;
+  border-color: #17a2b8;
+}
+.form-list-ul .form-list-li::before {
+  content: counter(categoryCounter) ".";
+  margin-right: 5px;
+  font-weight: bolder;
+  white-space: nowrap;
+}

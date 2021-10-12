@@ -436,3 +436,8 @@ select {
   color: inherit;
   font-size: inherit;
 }
+
+.margin-horizon {
+  margin-left: 5px;
+  margin-right: 5px;
+}

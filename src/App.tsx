@@ -1,11 +1,11 @@
-import React from 'react';
-import logo from './assets/logo.svg';
-import './App.css';
-import './assets/font/myFont.css'
-import './common/DateExtension.js'
-import ReportList from './views/ReportList';
-import CreateForm from './views/CreateForm';
-
+import React from "react"
+import logo from "./assets/logo.svg"
+import "./App.css"
+import "./assets/font/myFont.css"
+import "./assets/font/myFont_extend.css"
+import "./common/DateExtension.js"
+import ReportList from "./views/ReportList"
+import CreateForm from "./views/CreateForm"
 
 function App() {
   console.log(logo)
@@ -21,7 +21,7 @@ function App() {
         <CreateForm />
       </main>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

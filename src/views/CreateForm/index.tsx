@@ -1,4 +1,3 @@
-import * as ReactRedux from "react-redux"
 import { connect } from "react-redux"
 import React, { useState } from "react"
 import styles from "./index.module.less"
@@ -10,8 +9,6 @@ const mapStateToProps = (state: any) => {
   console.log("CreateForm", state)
   return state
 }
-
-console.log(ReactRedux)
 
 const CreateForm = (props: any) => {
   console.log("createform", styles)
@@ -68,7 +65,11 @@ let Body = (props: any) => {
   const [startDate, setStartDate] = useState("")
   const [endDate, setEndDate] = useState("")
   const handleSubmit = () => {
-    console.log(name)
+    console.log(name, startDate, endDate)
+  }
+  const setTagDate = (start, end) => {
+    setStartDate(start)
+    setEndDate(end)
   }
 
   let date = new Date()
@@ -98,9 +99,48 @@ let Body = (props: any) => {
       endDate: Format(date, dateFormat),
       text: "Nearly three years",
     },
+    {
+      startDate: Format(new Date(date.getFullYear() - 1, 0, 1), dateFormat),
+      endDate: Format(new Date(date.getFullYear() - 1, 11, 1), dateFormat),
+      text: (date.getFullYear() - 1).toString(),
+    },
+    {
+      startDate: Format(new Date(date.getFullYear() - 2, 0, 1), dateFormat),
+      endDate: Format(new Date(date.getFullYear() - 2, 11, 1), dateFormat),
+      text: (date.getFullYear() - 2).toString(),
+    },
   ]
   let tagItems = tagData.map(item => (
-    <span className="my-tag text-bold">{item.text}</span>
+    <span
+      className={`${common["my-tag"]} text-bold`}
+      onClick={() => setTagDate(item.startDate, item.endDate)}
+    >
+      {item.text}
+    </span>
+  ))
+
+  let labelData = [
+    { name: "rakuten", value: "0" },
+    { name: "yahoo", value: "1" },
+    { name: "amazon", value: "2" },
+  ]
+  let labelItems = labelData.map(item => (
+    <>
+      <input
+        id={`market-${item.value}`}
+        type="checkbox"
+        name="market"
+        value={item.value}
+        hidden={true}
+        disabled={!editable}
+      />
+      <label
+        htmlFor={`market-${item.value}`}
+        className={`${common["my-checkbox"]} ${common["my-checkbox-radius"]}`}
+      >
+        <i className={`icon-${item.name}`}></i>
+      </label>
+    </>
   ))
 
   return (
@@ -132,6 +172,7 @@ let Body = (props: any) => {
             name="startDate"
             type="text"
             className={`${styles["input-bottom-border"]}`}
+            defaultValue={startDate}
             placeholder=""
             disabled={!editable}
           />
@@ -142,17 +183,28 @@ let Body = (props: any) => {
             name="endDate"
             type="text"
             className={`${styles["input-bottom-border"]}`}
+            defaultValue={endDate}
             placeholder=""
             disabled={!editable}
           />
           <i className={`ic ic-calendar ${styles["input-icon"]}`}></i>
         </div>
       </div>
-      <div className={styles.row}>
+      <div className={`${styles.row} ${editable ? "" : common["hide"]}`}>
         <div className={`${styles["input-title"]} col-md-2 mobile-hide`}></div>
-        <div className="input-group col-md-10 col-sm-12">{tagItems}</div>
+        <div className={`${styles["input-group"]} col-md-10 col-sm-12`}>
+          {tagItems}
+        </div>
       </div>
       <br />
+      <div className={styles.row}>
+        <div className={`${styles["input-title"]} col-sm-12 col-md-2`}>
+          <span>Target Market:</span>
+        </div>
+        <div className={`${styles["input-group"]} col-md-10 col-sm-12 text-sm`}>
+          {labelItems}
+        </div>
+      </div>
       <div
         className={`${styles["input-group"]} ${styles["flex-container"]} ${styles["flex-wrap"]} col-sm-12 col-md-12 `}
       >

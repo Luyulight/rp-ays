@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import styles from "./index.module.less"
 import common from "./../common.module.less"
 import { Format } from "./../../common/DateExtension"
-import WordInput from "../../components/WordInput"
+import tempData from "./tempData"
 
 const mapStateToProps = (state: any) => {
   console.log("CreateForm", state)
@@ -65,6 +65,7 @@ let Body = (props: any) => {
   const [startDate, setStartDate] = useState("")
   const [endDate, setEndDate] = useState("")
   const [markets, setMarkets] = useState([0, 1, 2])
+  const [categories, setCategories] = useState(tempData.categories)
   const handleSubmit = () => {
     console.log(name, startDate, endDate, markets)
   }
@@ -80,6 +81,14 @@ let Body = (props: any) => {
       arr.push(value)
     }
     setMarkets(arr)
+  }
+  const deleteCategroy = index => {
+    console.log("indeletecategory")
+    console.log(categories)
+    let tempCate = categories
+    tempCate.splice(index, 1)
+    setCategories(tempCate)
+    console.log(tempCate, categories)
   }
 
   let date = new Date()
@@ -155,64 +164,7 @@ let Body = (props: any) => {
     </>
   ))
 
-  let listData = [
-    { cid: 2501, market: 1, cname: "コスメ、美容、ヘアケア", group: false },
-    {
-      cid: 2502,
-      market: 1,
-      cname: "スマホ、タブレット、パソコン",
-      group: false,
-    },
-    {
-      cid: 2497,
-      market: 1,
-      cname: "ベビー、キッズ、マタニティ",
-      group: false,
-    },
-    {
-      cid: 465392,
-      market: 2,
-      cname: "本",
-      group: false,
-    },
-    {
-      cid: 134,
-      market: -1,
-      cname: "test group",
-      group: true,
-    },
-    {
-      cid: 100227,
-      market: 0,
-      cname: "食品",
-      group: false,
-    },
-  ]
-  let listItems = listData.map(item => (
-    <li className={styles["form-list-li"]}>
-      <span>
-        <i
-          className={
-            item.market < 0
-              ? "icon-group margin-horizon"
-              : item.market < 1
-              ? "icon-rakuten-sm"
-              : item.market < 2
-              ? "icon-yahoo-sm"
-              : "icon-amazon-sm"
-          }
-        ></i>
-        <span className={common["text-bold"]}>{item.cname}</span>
-      </span>
-      <div className={styles["form-list-edit-container"]}>
-        <i
-          className={`ic ic-close-circle-fill ${common["text-danger"]} ${
-            editable ? "" : common["hide"]
-          }`}
-        ></i>
-      </div>
-    </li>
-  ))
+  let listData = tempData.categories
 
   return (
     <div className={styles["panel-body"]}>
@@ -269,10 +221,14 @@ let Body = (props: any) => {
       <br />
       <Row rowName="Categories:" alignTop={true}>
         <div className={`${styles["input-group"]} col-md-10 col-sm-12 text-sm`}>
-          <ul className={styles["form-list-ul"]}>{listItems}</ul>
+          <CategroyList
+            listData={categories}
+            editable={editable}
+            closeFunc={deleteCategroy}
+          />
           <div
             className={`${common["animation-fade-in"]} ${
-              listItems.length == 0 ? "" : common["hide"]
+              listData.length == 0 ? "" : common["hide"]
             }`}
           >
             no category selected
@@ -298,6 +254,18 @@ let Body = (props: any) => {
           <i className={`ic ic-search ${styles["input-icon"]}`}></i>
         </div>
       </Row>
+      <Row rowName="Makers:" alignTop={true}>
+        <div className={`${styles["input-group"]} col-md-10 col-sm-12 text-sm`}>
+          <CategroyList listData={listData} editable={editable} />
+          <div
+            className={`${common["animation-fade-in"]} ${
+              listData.length == 0 ? "" : common["hide"]
+            }`}
+          >
+            no maker selected
+          </div>
+        </div>
+      </Row>
       <div
         className={`${styles["input-group"]} ${styles["flex-container"]} ${styles["flex-wrap"]} col-sm-12 col-md-12 `}
       >
@@ -316,7 +284,14 @@ let Body = (props: any) => {
   )
 }
 
-let Row = (props: any) => {
+// 重复的行代码封装成Row组件
+interface RowContent {
+  rowName?: string
+  shown?: boolean
+  alignTop?: boolean
+  children: object
+}
+const Row = (props: RowContent) => {
   let { rowName, shown, alignTop } = props
   return (
     <div className={`${styles.row} ${shown ? common.hide : ""}`}>
@@ -328,6 +303,52 @@ let Row = (props: any) => {
       {props.children}
     </div>
   )
+}
+
+// Category列表封装成组件
+interface CategroyItem {
+  cid: number
+  market: number
+  cname: string
+  group: boolean
+}
+type CloseFunc = (index: number) => void
+interface CategoryProp {
+  listData: Array<CategroyItem>
+  editable: boolean
+  closeFunc?: CloseFunc
+}
+const CategroyList = (props: CategoryProp) => {
+  let { listData, editable, closeFunc } = props
+
+  let listItems = listData.map((item, index) => (
+    <li key={index} className={styles["form-list-li"]}>
+      <span>
+        <i
+          className={
+            item.market < 0
+              ? "icon-group margin-horizon"
+              : item.market < 1
+              ? "icon-rakuten-sm"
+              : item.market < 2
+              ? "icon-yahoo-sm"
+              : "icon-amazon-sm"
+          }
+        ></i>
+        <span className={common["text-bold"]}>{item.cname}</span>
+      </span>
+      <div
+        className={`${styles["form-list-edit-container"]} ${
+          editable ? "" : common["hide"]
+        }`}
+        onClick={() => closeFunc(index)}
+      >
+        <i className={`ic ic-close-circle-fill ${common["text-danger"]}`}></i>
+      </div>
+    </li>
+  ))
+
+  return <ul className={styles["form-list-ul"]}>{listItems}</ul>
 }
 
 export default connect(mapStateToProps)(CreateForm)

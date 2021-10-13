@@ -83,12 +83,9 @@ let Body = (props: any) => {
     setMarkets(arr)
   }
   const deleteCategroy = index => {
-    console.log("indeletecategory")
-    console.log(categories)
-    let tempCate = categories
-    tempCate.splice(index, 1)
-    setCategories(tempCate)
-    console.log(tempCate, categories)
+    let temp = [...categories]
+    temp.splice(index, 1)
+    setCategories(temp)
   }
 
   let date = new Date()

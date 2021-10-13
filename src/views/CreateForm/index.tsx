@@ -216,10 +216,7 @@ let Body = (props: any) => {
 
   return (
     <div className={styles["panel-body"]}>
-      <div className={styles.row}>
-        <div className={`${styles["input-title"]} col-sm-12 col-md-2`}>
-          <span>Report Name:</span>
-        </div>
+      <Row rowName="Report Name:">
         <div className={`${styles["input-group"]} col-sm-12 col-md-10`}>
           <input
             name="reportName"
@@ -232,12 +229,9 @@ let Body = (props: any) => {
           />
           <i className={`ic ic-detail ${styles["input-icon"]}`}></i>
         </div>
-      </div>
+      </Row>
       <br />
-      <div className={styles.row}>
-        <div className={`${styles["input-title"]} col-sm-12 col-md-2`}>
-          <span>Date Group:</span>
-        </div>
+      <Row rowName="Date Group:">
         <div className={`${styles["input-group"]} col-sm-12 col-md-5`}>
           <input
             name="startDate"
@@ -260,27 +254,20 @@ let Body = (props: any) => {
           />
           <i className={`ic ic-calendar ${styles["input-icon"]}`}></i>
         </div>
-      </div>
-      <div className={`${styles.row} ${editable ? "" : common["hide"]}`}>
-        <div className={`${styles["input-title"]} col-md-2 mobile-hide`}></div>
+      </Row>
+      <Row shown={!editable}>
         <div className={`${styles["input-group"]} col-md-10 col-sm-12`}>
           {tagItems}
         </div>
-      </div>
+      </Row>
       <br />
-      <div className={styles.row}>
-        <div className={`${styles["input-title"]} col-sm-12 col-md-2`}>
-          <span>Target Market:</span>
-        </div>
+      <Row rowName="Target Market:">
         <div className={`${styles["input-group"]} col-md-10 col-sm-12 text-sm`}>
           {labelItems}
         </div>
-      </div>
+      </Row>
       <br />
-      <div className={styles.row}>
-        <div className={`${styles["input-title"]} col-sm-12 col-md-2`}>
-          <span className={styles["self-align-top"]}>Categories:</span>
-        </div>
+      <Row rowName="Categories:" alignTop={true}>
         <div className={`${styles["input-group"]} col-md-10 col-sm-12 text-sm`}>
           <ul className={styles["form-list-ul"]}>{listItems}</ul>
           <div
@@ -291,17 +278,26 @@ let Body = (props: any) => {
             no category selected
           </div>
         </div>
-      </div>
-      <div className={styles.row}>
-        <div className={`${styles["input-title"]} col-sm-12 col-md-2`}></div>
+      </Row>
+      <Row>
         <div className={`${styles["input-group"]} col-md-10 col-sm-12`}>
           <button className="btn btn-primary btn-gradient-primary btn-dashed text-bold col-sm-12 col-md-12 light-hover text-sm no-radius">
             <i className="ic ic-plus"></i>Add Category
           </button>
         </div>
-      </div>
+      </Row>
       <br />
-      <div></div>
+      <Row shown={!editable}>
+        <div className={`${styles["input-group"]} col-sm-12 col-md-10`}>
+          <input
+            name="reportName"
+            type="text"
+            className={`${styles["input-bottom-border"]}`}
+            placeholder="Input to search makers"
+          />
+          <i className={`ic ic-search ${styles["input-icon"]}`}></i>
+        </div>
+      </Row>
       <div
         className={`${styles["input-group"]} ${styles["flex-container"]} ${styles["flex-wrap"]} col-sm-12 col-md-12 `}
       >
@@ -316,6 +312,20 @@ let Body = (props: any) => {
           ></i>
         </button>
       </div>
+    </div>
+  )
+}
+
+let Row = (props: any) => {
+  let { rowName, shown, alignTop } = props
+  return (
+    <div className={`${styles.row} ${shown ? common.hide : ""}`}>
+      <div className={`${styles["input-title"]} col-sm-12 col-md-2`}>
+        <span className={alignTop ? styles["self-align-top"] : ""}>
+          {rowName}
+        </span>
+      </div>
+      {props.children}
     </div>
   )
 }

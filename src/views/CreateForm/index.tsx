@@ -225,7 +225,7 @@ let Body = (props: any) => {
           />
           <div
             className={`${common["animation-fade-in"]} ${
-              listData.length == 0 ? "" : common["hide"]
+              categories.length == 0 ? "" : common["hide"]
             }`}
           >
             no category selected

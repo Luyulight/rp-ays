@@ -1,0 +1,91 @@
+.dark{
+  @baseColor: lightcyan;
+  border-bottom: 2px solid @baseColor;
+  color:@baseColor;
+}
+.light{
+  @baseColor: gray;
+  border-bottom: 2px solid @baseColor;
+  color:@baseColor;
+}
+
+.inputGroup {
+  padding-left: 0;
+  padding-right: 0;
+  margin: 0px 5px;
+  position: relative;
+  display: table;
+  border-collapse: separate;
+  width: 100%;
+  input {
+    cursor: default;
+    width: 100%;
+    border-top: none;
+    border-left: none;
+    border-radius: 0;
+    border-right: none;
+    line-height: 1.5;
+    text-indent: .5rem ;
+    height: 30px;
+    transition: box-shadow 0.3s;
+    outline: none;
+    font: inherit;
+    font-size: 1.2rem;
+    margin: 0;
+    background: transparent;
+  }
+  input:hover {
+    border-color: #0fc5a5;
+    color: #0fc5a5;
+  }
+  input:hover + span {
+    span {
+      color: #0fc5a5;
+    }
+  }
+  input:focus {
+    border-color: #0fc5a5;
+    color: #0fc5a5;
+  }
+  input:focus + span {
+    span {
+      color: #0fc5a5;
+    }
+  }
+  input.error {
+    border-color: #ff4d4f;
+    color: #ff4d4f;
+  }
+  input.error + span {
+    span {
+      color:#ff4d4f;
+    }
+  }
+  span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 10px;
+    height: 30px;
+    line-height: 1.5;
+    pointer-events: none;
+    font-size: 1.2em;
+    top: 0;
+    span {
+      color:lightcyan
+    }
+  }
+}
+.withmsg::after{
+  content: attr(errMsg);
+  visibility: hidden;
+}
+.withmsg.error::after{
+  content: attr(errMsg);
+  visibility: visible;
+  color: #ff4d4f;
+}
+.withIcon {
+  text-indent: calc(1.25rem + 1.5em) !important;
+}
